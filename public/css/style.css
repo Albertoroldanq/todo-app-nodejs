@@ -1,22 +1,124 @@
-.completedTask {
-    text-decoration: line-through;
+* {
+    font-family: sans-serif;
 }
 
-.tasksContainer {
+h3 {
+    margin: 0;
+}
+
+.completedTask {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.taskDetails {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+}
+
+.taskFields {
+    padding: 0;
+}
+
+.deleteStatusButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-end;
 }
 
 .completedTasksContainer, .uncompletedTasksContainer {
-    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .task {
     display: flex;
-    width:90%;
+    flex-direction: column;
+    min-width: 400px;
+    background: #f5f5f5;
+    border: 10px solid white;
+    padding: 10px 10px 10px 20px;
 }
 
-.hidden{
+.taskPriority {
+    font-size: 14px;
+    border-radius: 3px;
+    padding: 5px 8px;
+    color: white;
+    width: fit-content;
+}
+.highPriority {
+    background: darkred;
+}
+.lowPriority {
+    background: green;
+}
+.mediumPriority {
+    background: darkorange;
+}
+
+.hidden {
     display: none;
 }
+
+.taskEditButton, .taskChangeStatusButton, .taskDeleteButton {
+    background: #aaa;
+    color: #fff;
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+    width: fit-content;
+    border-radius: 0;
+    border: none;
+    padding: 7px 10px;
+}
+
+.taskChangeStatusButton, .taskDeleteButton {
+    margin-top: 8px;
+    align-self: flex-end;
+}
+
+.taskEditButton {
+    align-self: flex-end;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.taskEditButton:hover, .taskChangeStatusButton[data-completed="true"]:hover {
+    background: #666;
+}
+
+.taskDeleteButton:hover {
+    background: darkred;
+}
+
+.taskChangeStatusButton[data-completed="false"]:hover {
+    background: green;
+}
+
+.taskEditButton[data-edit="Edit"]::after {
+     content: "\f303";
+ }
+
+.taskEditButton[data-edit="Cancel"]::after {
+    content: "\f00d";
+}
+
+.taskChangeStatusButton[data-completed="false"]::after {
+    content: "\f00c";
+}
+.taskChangeStatusButton[data-completed="true"]::after {
+    content: "\f01e";
+}
+
+.taskDeleteButton::after {
+    content: '\f2ed';
+}
+
+
+
 

@@ -5,46 +5,69 @@
     <label for="description">Task name</label>
     <input type="text" name="description" placeholder="details fo the task">
     <label for="priority">Task name</label>
-    <input type="text" name="priority" placeholder="high, low or medium">
+    <select name="priority" value="{{priority}}">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
     <input class="task-add-button" type="submit" name="submit" value="Add">
 </form>
 <div class="tasksContainer">
+    <h2>Uncompleted tasks</h2>
     <div class="uncompletedTasksContainer">
-        <h2>Uncompleted tasks</h2>
         {{#each uncompletedTasks}}
             <div class="task" data-completed="false">
-                <button class="taskEditButton" data-id="{{_id}}">Edit</button>
+                <button class="taskEditButton" data-id="{{_id}}" data-edit="Edit"></button>
                 <div class="taskDetails" data-id="{{_id}}">
-                    <h3 class="taskName taskDetail">Task: {{name}}</h3>
-                    <p class="taskDescription taskDetail">Description: {{description}}</p>
-                    <p class="taskPriority taskDetail">Priority: {{priority}}</p>
-                    <button class="taskChangeStatusButton" data-id="{{_id}}">Completed</button>
-                    <button class="taskDeleteButton" data-id="{{_id}}">Delete</button>
-                    <button class="taskUpdateButton" data-id="{{_id}}">Update</button>
+                    <div class="taskFields">
+                        <h3 class="taskName taskDetail">{{name}}</h3>
+                        <p class="taskDescription taskDetail">{{description}}</p>
+                        <p class="taskPriority taskDetail">{{priority}}</p>
+                    </div>
+                    <div class="deleteStatusButtons">
+                        <button class="taskChangeStatusButton" data-id="{{_id}}" data-completed="false"></button>
+                        <button class="taskDeleteButton" data-id="{{_id}}"></button>
+                    </div>
                 </div>
+                <form class="hidden updateTaskForm" action="" data-id="{{_id}}">
+                    <input type="text" name="name" placeholder="{{name}}" value="{{name}}">
+                    <input type="text" name="description" placeholder="{{description}}" value="{{description}}">
+                    <select name="priority" value="{{priority}}">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <button class="taskUpdateButton" data-id="{{_id}}" data-completed="false">Update</button>
+                </form>
             </div>
         {{/each}}
     </div>
+    <h2>Completed tasks</h2>
     <div class="completedTasksContainer">
-        <h2>Completed tasks</h2>
         {{#each completedTasks}}
             <div class="task" data-completed="true">
-                <button class="taskEditButton" data-id="{{_id}}">Edit</button>
-                <div class="taskDetails completedTask" data-id="{{_id}}">
-                    <h3 class="taskName taskDetail" data-id="{{_id}}">Task: {{name}}</h3>
-                    <p class="taskDescription taskDetail" data-id="{{_id}}">Description: {{description}}</p>
-                    <p class="taskPriority taskDetail" data-id="{{_id}}">Priority: {{priority}}</p>
-                    <button class="taskChangeStatusButton" data-id="{{_id}}">Uncompleted</button>
-                    <button class="taskDeleteButton" data-id="{{_id}}">Delete</button>
-                    <form class="hidden updateTaskForm" action="" data-id="{{_id}}">
-                        <input type="text" name="name" placeholder="{{name}}" value="{{name}}">
-                        <input type="text" name="description" placeholder="{{description}}" value="{{description}}">
-                        <input type="text" name="priority" placeholder="{{priority}}" value="{{priority}}">
-                        <button class="taskUpdateButton" data-id="{{_id}}">Update</button>
-                    </form>
-
+                <button class="taskEditButton" data-id="{{_id}}" data-edit="Edit"></button>
+                <div class="taskDetails" data-id="{{_id}}">
+                    <div class="taskFields completedTask">
+                        <h3 class="taskName taskDetail" data-id="{{_id}}">{{name}}</h3>
+                        <p class="taskDescription taskDetail" data-id="{{_id}}">{{description}}</p>
+                        <p class="taskPriority taskDetail" data-id="{{_id}}">{{priority}}</p>
+                    </div>
+                    <div class="deleteStatusButtons">
+                        <button class="taskChangeStatusButton" data-id="{{_id}}" data-completed="true"></button>
+                        <button class="taskDeleteButton" data-id="{{_id}}"></button>
+                    </div>
                 </div>
-
+                <form class="hidden updateTaskForm" action="" data-id="{{_id}}">
+                    <input type="text" name="name" placeholder="{{name}}" value="{{name}}">
+                    <input type="text" name="description" placeholder="{{description}}" value="{{description}}">
+                    <select name="priority" value="{{priority}}">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <button class="taskUpdateButton" data-id="{{_id}}" data-completed="true">Update</button>
+                </form>
             </div>
         {{/each}}
     </div>

@@ -14,8 +14,8 @@ function router(app) {
         MongoClient.connect(mongoUrl, mongoSettings, async (error, client) => {
             const db = client.db('todo-app')
             const tasksCollection = db.collection('tasks')
-            const completedTasks = await tasksCollection.find({completed: true}).toArray()
-            const uncompletedTasks = await tasksCollection.find({completed: false}).toArray()
+            const completedTasks = await tasksCollection.find({completed: "true"}).toArray()
+            const uncompletedTasks = await tasksCollection.find({completed: "false"}).toArray()
             completedTasks.reverse()
             uncompletedTasks.reverse()
             response.render('home', {completedTasks, uncompletedTasks})
@@ -31,7 +31,7 @@ function router(app) {
                     name: request.body.name,
                     description: request.body.description,
                     priority: request.body.priority,
-                    completed: false
+                    completed: "false"
                 }
                 const db = client.db('todo-app')
                 const tasksCollection = db.collection('tasks')
@@ -58,7 +58,7 @@ function router(app) {
         let id = ObjectId(request.params.id) // turns the string into an Object ID
         MongoClient.connect(mongoUrl, mongoSettings, async (error, client) => {
             let tasksCollection = client.db('todo-app').collection('tasks')
-            await tasksCollection.updateOne({_id: id}, {$set: {completed: false}})
+            await tasksCollection.updateOne({_id: id}, {$set: {completed: "false"}})
 
             response.sendStatus(200)
         })
@@ -68,7 +68,19 @@ function router(app) {
         let id = ObjectId(request.params.id) // turns the string into an Object ID
         MongoClient.connect(mongoUrl, mongoSettings, async (error, client) => {
             let tasksCollection = client.db('todo-app').collection('tasks')
-            await tasksCollection.updateOne({_id: id}, {$set: {completed: true}})
+            await tasksCollection.updateOne({_id: id}, {$set: {completed: "true"}})
+
+            response.sendStatus(200)
+        })
+    })
+
+    app.put('/tasks/:id/update', (request, response) => {
+        let id = ObjectId(request.params.id) // turns the string into an Object ID
+        MongoClient.connect(mongoUrl, mongoSettings, async (error, client) => {
+           console.log(request.body.name)
+
+            let tasksCollection = client.db('todo-app').collection('tasks')
+            await tasksCollection.updateOne({_id: id}, {$set: {name: request.body.name, description: request.body.description, priority: request.body.priority, completed: request.body.completed}})
 
             response.sendStatus(200)
         })
