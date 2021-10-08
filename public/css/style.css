@@ -1,0 +1,22 @@
+.completedTask {
+    text-decoration: line-through;
+}
+
+.tasksContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.completedTasksContainer, .uncompletedTasksContainer {
+    width: 50%;
+}
+
+.task {
+    display: flex;
+    width:90%;
+}
+
+.hidden{
+    display: none;
+}
+
