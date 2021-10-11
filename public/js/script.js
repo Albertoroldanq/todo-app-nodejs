@@ -1,14 +1,14 @@
 let checkPriority = () => {
     document.querySelectorAll('.taskPriority').forEach(label => {
-        if (label.textContent === 'Low'){
+        if (label.textContent === 'Low') {
             label.classList.add('lowPriority')
             label.classList.remove('highPriority')
             label.classList.remove('mediumPriority')
-        } else if (label.textContent === 'Medium'){
+        } else if (label.textContent === 'Medium') {
             label.classList.add('mediumPriority')
             label.classList.remove('highPriority')
             label.classList.remove('lowPriority')
-        } else if (label.textContent === 'High'){
+        } else if (label.textContent === 'High') {
             label.classList.add('highPriority')
             label.classList.remove('mediumPriority')
             label.classList.remove('lowPriority')
@@ -30,14 +30,6 @@ deleteButtons.forEach(button => {
         button.parentElement.parentElement.parentElement.classList.add('hidden')
     })
 })
-
-// let completeButtons = document.querySelectorAll('.taskCompleteButton')
-// completeButtons.forEach(button => {
-//     button.addEventListener('click', (event) => {
-//         let taskId = button.dataset.id
-//
-//     })
-// })
 
 let uncompleteButtons = document.querySelectorAll('.taskChangeStatusButton')
 uncompleteButtons.forEach(button => {
@@ -100,7 +92,6 @@ editButtons.forEach(button => {
 
 
 let updateButtons = document.querySelectorAll('.taskUpdateButton')
-let updateTaskInputs = document.querySelectorAll('.updateTaskForm')
 
 updateButtons.forEach(button => {
     button.addEventListener('click', (event) => {
@@ -123,7 +114,7 @@ updateButtons.forEach(button => {
         })
 
         editButtons.forEach(editButton => {
-            if(taskId === editButton.dataset.id) {
+            if (taskId === editButton.dataset.id) {
                 editButton.dataset.edit = 'Edit'
             }
         })
@@ -148,5 +139,24 @@ updateButtons.forEach(button => {
         })
     })
 })
+
+let hiddenButtons = document.querySelectorAll('button.hidden')
+let taskGroups = document.querySelectorAll('.task')
+hiddenButtons.forEach(hiddenButton => {
+    taskGroups.forEach(task => {
+        task.addEventListener('mouseover', event => {
+            if (hiddenButton.dataset.id === task.firstElementChild.dataset.id) {
+                hiddenButton.classList.remove('hidden')
+            }
+        })
+        task.addEventListener('mouseout', event => {
+            if (hiddenButton.dataset.id === task.firstElementChild.dataset.id) {
+                hiddenButton.classList.add('hidden')
+            }
+        })
+    })
+})
+
+
 
 

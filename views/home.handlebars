@@ -1,23 +1,29 @@
 <h2>Add a new task</h2>
-<form action="/addNewTask" method="POST">
-    <label for="name">Task name</label>
-    <input type="text" name="name" placeholder="make coffee">
-    <label for="description">Task name</label>
-    <input type="text" name="description" placeholder="details fo the task">
-    <label for="priority">Task name</label>
-    <select name="priority" value="{{priority}}">
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
-    </select>
-    <input class="task-add-button" type="submit" name="submit" value="Add">
+<form class="addTaskForm" action="/addNewTask" method="POST">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="make coffee">
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <input type="text" name="description" placeholder="add task details">
+    </div>
+    <div>
+        <label for="priority">Priority</label>
+        <select name="priority" value="{{priority}}">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+    </div>
+    <button class="task-add-button" type="submit" name="submit"> Add</button>
 </form>
 <div class="tasksContainer">
     <h2>Uncompleted tasks</h2>
     <div class="uncompletedTasksContainer">
         {{#each uncompletedTasks}}
             <div class="task" data-completed="false">
-                <button class="taskEditButton" data-id="{{_id}}" data-edit="Edit"></button>
+                <button class="taskEditButton hidden" data-id="{{_id}}" data-edit="Edit"></button>
                 <div class="taskDetails" data-id="{{_id}}">
                     <div class="taskFields">
                         <h3 class="taskName taskDetail">{{name}}</h3>
@@ -25,8 +31,8 @@
                         <p class="taskPriority taskDetail">{{priority}}</p>
                     </div>
                     <div class="deleteStatusButtons">
-                        <button class="taskChangeStatusButton" data-id="{{_id}}" data-completed="false"></button>
-                        <button class="taskDeleteButton" data-id="{{_id}}"></button>
+                        <button class="taskChangeStatusButton hidden" data-id="{{_id}}" data-completed="false"></button>
+                        <button class="taskDeleteButton hidden" data-id="{{_id}}"></button>
                     </div>
                 </div>
                 <form class="hidden updateTaskForm" action="" data-id="{{_id}}">
@@ -46,7 +52,7 @@
     <div class="completedTasksContainer">
         {{#each completedTasks}}
             <div class="task" data-completed="true">
-                <button class="taskEditButton" data-id="{{_id}}" data-edit="Edit"></button>
+                <button class="taskEditButton hidden" data-id="{{_id}}" data-edit="Edit"></button>
                 <div class="taskDetails" data-id="{{_id}}">
                     <div class="taskFields completedTask">
                         <h3 class="taskName taskDetail" data-id="{{_id}}">{{name}}</h3>
@@ -54,8 +60,8 @@
                         <p class="taskPriority taskDetail" data-id="{{_id}}">{{priority}}</p>
                     </div>
                     <div class="deleteStatusButtons">
-                        <button class="taskChangeStatusButton" data-id="{{_id}}" data-completed="true"></button>
-                        <button class="taskDeleteButton" data-id="{{_id}}"></button>
+                        <button class="taskChangeStatusButton hidden" data-id="{{_id}}" data-completed="true"></button>
+                        <button class="taskDeleteButton hidden" data-id="{{_id}}"></button>
                     </div>
                 </div>
                 <form class="hidden updateTaskForm" action="" data-id="{{_id}}">
